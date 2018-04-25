@@ -1,0 +1,7 @@
+#!/bin/sh
+composer install
+if ! [ -e /data/storage/.init-key-generated ]; then
+  touch /data/storage/.init-key-generated
+  php artisan key:generate --force
+fi
+php artisan migrate --force

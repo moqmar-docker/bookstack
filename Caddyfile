@@ -1,0 +1,10 @@
+http:// {
+    root /data/public
+    fastcgi / unix:/run/php/sock php
+
+    rewrite  {
+        to {path} {path}/ /index.php
+    }
+
+    gzip
+}

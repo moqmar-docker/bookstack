@@ -1,0 +1,2 @@
+run build the docker container: docker build --force-rm "$@" --tag momar/bookstack .
+test: docker run --rm -it momar/bookstack "$@"
