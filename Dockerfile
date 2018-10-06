@@ -2,7 +2,7 @@ FROM momar/caddy-php
 
 USER 0
 
-RUN apk add --no-cache git php7-tidy php7-fileinfo php7-memcached &&\
+RUN apk add --no-cache git php7-tidy php7-fileinfo php7-memcached php7-ldap &&\
     php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&\
     php composer-setup.php &&\
     php -r "unlink('composer-setup.php');" &&\
