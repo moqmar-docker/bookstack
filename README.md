@@ -4,10 +4,10 @@
    ```
    docker run --name bookstack_db -e MYSQL_ROOT_PASSWORD=`tr -dc A-Za-z0-9 < /dev/urandom | head -c 30 | tee /dev/stderr` mariadb
    ```
-2. Create a ".env" file for BookStack, read more at https://github.com/BookStackApp/BookStack.
+2. Create a "env" file for BookStack, read more at https://github.com/BookStackApp/BookStack.
 3. Run bookstack:
    ```
-   docker run -v $PWD/.env:/data/.env -v $PWD/storage:/data/storage -v $PWD/uploads:/data/public/uploads -p 8080:80 bookstack
+   docker run -v $PWD/env:/data/.env -v $PWD/storage:/data/storage/uploads -v $PWD/uploads:/data/public/uploads -p 8080:80 bookstack
    ```
 
 ## With docker-compose
@@ -20,15 +20,12 @@ services:
     ports:
     - 8080:80
     volumes:
-    - .env:/data/.env
-    - storage:/data/storage
+    - env:/data/.env
+    - storage:/data/storage/uploads
     - uploads:/data/public/uploads
-    networks:
-    - net
   db:
     image: mariadb
     restart: unless-stopped
     env: MYSQL_ROOT_PASSWORD: changeme
-networks:
-  net:
+    volumes: [./database:/var/lib/mysql]
 ```
